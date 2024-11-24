@@ -6,9 +6,14 @@
 */
 
 #include <guiddef.h>
+#include <wrl/client.h>
+#include <xaudio2.h>
+#include <array>
 
-// TODO: DOCUMENT ALL THESE ACCORDING TO ORIGINAL DOCUMENTS!!!!
+using Microsoft::WRL::ComPtr;
 
+#define MAX_ROUTES 7
+#define OPEN_SEGAERR_UNKNOWN OPEN_SEGARESULT_FAILURE(1)
 #define OPEN_SEGA_SUCCESS 0L
 typedef int OPEN_SEGASTATUS;
 #define OPEN_SEGARESULT_FAILURE(_x)      ((1 << 31) | 0xA000 | (_x))
@@ -183,6 +188,30 @@ typedef struct OPEN_SynthParamSetExt
 	OPEN_HASYNTHPARAMSEXT param;
 	int lPARWValue;
 } OPEN_SynthParamSet;
+
+typedef struct OPEN_SynthParamSetExt
+{
+    OPEN_HASYNTHPARAMSEXT param;
+    int lPARWValue;
+} OPEN_SynthParamSet;
+
+// Add new structs and externs here
+struct ChannelConfig {
+    OPEN_HAROUTING port;
+    float frontLeft;
+    float frontRight;
+    float frontCenter;
+    float lfe;
+    float rearLeft;
+    float rearRight;
+};
+
+extern OPEN_SEGASTATUS g_lastStatus;
+extern ComPtr<IXAudio2> g_xa2;
+extern IXAudio2MasteringVoice* g_masteringVoice;
+extern std::array<IXAudio2SubmixVoice*, MAX_ROUTES> g_submixVoices;
+
+OPEN_SEGASTATUS SetStatus(OPEN_SEGASTATUS status);
 
 __declspec(dllexport) OPEN_SEGASTATUS SEGAAPI_Play(void* hHandle);
 __declspec(dllexport) OPEN_SEGASTATUS SEGAAPI_Pause(void* hHandle);
