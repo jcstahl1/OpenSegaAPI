@@ -59,8 +59,8 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_NZ
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,0
- PRODUCTVERSION 1,0,0,0
+ FILEVERSION 1,0,1,0
+ PRODUCTVERSION 1,0,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -77,12 +77,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "TeknoGods"
             VALUE "FileDescription", "OpenSegaAPI"
-            VALUE "FileVersion", "1.0.0.0"
+            VALUE "FileVersion", "1.0.1.0-js"
             VALUE "InternalName", "Opensegaapi.dll"
             VALUE "LegalCopyright", "Copyright (C) 2019"
             VALUE "OriginalFilename", "Opensegaapi.dll"
             VALUE "ProductName", "OpenSegaAPI"
-            VALUE "ProductVersion", "1.0.0.0"
+            VALUE "ProductVersion", "1.0.1.0-js"
         END
     END
     BLOCK "VarFileInfo"
