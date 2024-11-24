@@ -103,6 +103,8 @@ public:
 
 struct OPEN_segaapiBuffer_t
 {
+	unsigned int currentPosition;
+	unsigned int flags;
 	void* userData;
 	OPEN_HAWOSEGABUFFERCALLBACK callback;
 	bool synthesizer;
@@ -419,17 +421,27 @@ static void resetBuffer(OPEN_segaapiBuffer_t* buffer)
 }
 
 static WRL::ComPtr<IXAudio2> g_xa2;
-static IXAudio2MasteringVoice* g_masteringVoice;
+static IXAudio2MasteringVoice* g_masteringVoice; 
 static IXAudio2SubmixVoice* g_submixVoices[6];
+
+struct ChannelConfig {
+    OPEN_HAROUTING port;
+    float frontLeft;
+    float frontRight;
+    float frontCenter;
+    float lfe;
+    float rearLeft;
+    float rearRight;
+};
 
 static void updateBufferNew(OPEN_segaapiBuffer_t* buffer, unsigned int offset, size_t length)
 {
-	// don't update with pending defers
-	if (!buffer->defers.empty())
-	{
-		info("updateBufferNew: DEFER!");
-		return;
-	}
+    // don't update with pending defers
+    if (!buffer->defers.empty())
+    {
+        info("updateBufferNew: DEFER!");
+        return;
+    }
 
 	CHECK_HR(buffer->xaVoice->FlushSourceBuffers());
 
