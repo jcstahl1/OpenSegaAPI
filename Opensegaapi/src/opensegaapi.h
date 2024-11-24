@@ -189,13 +189,6 @@ typedef struct OPEN_SynthParamSetExt
 	int lPARWValue;
 } OPEN_SynthParamSet;
 
-typedef struct OPEN_SynthParamSetExt
-{
-    OPEN_HASYNTHPARAMSEXT param;
-    int lPARWValue;
-} OPEN_SynthParamSet;
-
-// Add new structs and externs here
 struct ChannelConfig {
     OPEN_HAROUTING port;
     float frontLeft;
